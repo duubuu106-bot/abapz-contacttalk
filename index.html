@@ -663,28 +663,47 @@ document.addEventListener("click", event => {
     );
   }
 
-  async function loadTasks() {
-    setConnection(false, "데이터 불러오는 중");
-    $("headlineText").innerHTML = '업무 데이터를 불러오고 있어요.<br><span class="highlight">잠시만 기다려 주세요.</span>';
+async function loadTasks() {
+  setConnection(false, "데이터 불러오는 중");
+  $("headlineText").innerHTML =
+    '업무 데이터를 불러오고 있어요.<br><span class="highlight">잠시만 기다려 주세요.</span>';
 
-    try {
-      const response = await fetch(DATA_URL, { cache: "no-store" });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const json = await response.json();
-      if (!Array.isArray(json)) throw new Error("JSON 형식이 배열이 아닙니다.");
+  try {
+    const response = await fetch(DATA_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-      tasks = json.map(item => ({
-        const remoteTasks = json.map(item => ({
-        taskId: item.taskId ?? null,
-        partnerName: item.partnerName ?? null,
-        taskTitle: item.taskTitle ?? null,
-        dueDate: item.dueDate ?? null,
-        importance: item.importance ?? null,
-        status: item.status ?? null,
-        replyWaiting: item.replyWaiting === true,
-        followUpRequired: item.followUpRequired === true,
-          nextAction: item.nextAction ?? null
-}));
+    const json = await response.json();
+    if (!Array.isArray(json)) {
+      throw new Error("JSON 형식이 배열이 아닙니다.");
+    }
+
+    const remoteTasks = json.map(item => ({
+      taskId: item.taskId ?? null,
+      partnerName: item.partnerName ?? null,
+      taskTitle: item.taskTitle ?? null,
+      dueDate: item.dueDate ?? null,
+      importance: item.importance ?? null,
+      status: item.status ?? null,
+      replyWaiting: item.replyWaiting === true,
+      followUpRequired: item.followUpRequired === true,
+      nextAction: item.nextAction ?? null
+    }));
+
+    tasks = remoteTasks;
+    dataLoaded = true;
+
+    setConnection(true, "데이터 연결 완료");
+    renderDashboard();
+    renderTaskPage();
+
+  } catch (error) {
+    console.error("업무 데이터 로딩 오류:", error);
+    dataLoaded = false;
+    setConnection(false, "데이터 연결 실패");
+    $("headlineText").textContent =
+      "업무 데이터를 불러오지 못했어요. 연결 상태를 확인해 주세요.";
+  }
+}
 
 tasks = [
   ...remoteTasks,
