@@ -1,0 +1,113 @@
+
+[
+  {
+    "taskId": "T001",
+    "partnerName": "한빛유통",
+    "taskTitle": "견적서 전달",
+    "dueDate": "2026-10-27",
+    "importance": "high",
+    "status": "pending",
+    "replyWaiting": false,
+    "followUpRequired": true,
+    "nextAction": "견적서 전달 여부 확인"
+  },
+  {
+    "taskId": "T002",
+    "partnerName": "미래상사",
+    "taskTitle": "계약 조건 회신",
+    "dueDate": "2026-10-28",
+    "importance": "high",
+    "status": "in_progress",
+    "replyWaiting": true,
+    "followUpRequired": true,
+    "nextAction": "담당자에게 회신 일정 확인"
+  },
+  {
+    "taskId": "T003",
+    "partnerName": "다온기업",
+    "taskTitle": "월간 매출 자료 정리",
+    "dueDate": "2026-10-30",
+    "importance": "medium",
+    "status": "pending",
+    "replyWaiting": false,
+    "followUpRequired": false,
+    "nextAction": "매출 자료 취합"
+  },
+  {
+    "taskId": "T004",
+    "partnerName": "새롬테크",
+    "taskTitle": "발주 내역 확인",
+    "dueDate": "2026-10-28",
+    "importance": "medium",
+    "status": "completed",
+    "replyWaiting": false,
+    "followUpRequired": false,
+    "nextAction": "완료 기록 확인"
+  },
+  {
+    "taskId": "T005",
+    "partnerName": "한빛유통",
+    "taskTitle": "납품 일정 협의",
+    "dueDate": "2026-10-29",
+    "importance": "high",
+    "status": "in_progress",
+    "replyWaiting": true,
+    "followUpRequired": false,
+    "nextAction": "납품 가능 일정 확인"
+  },
+  {
+    "taskId": "T006",
+    "partnerName": "미래상사",
+    "taskTitle": "거래명세서 정리",
+    "dueDate": "2026-11-03",
+    "importance": "low",
+    "status": "pending",
+    "replyWaiting": false,
+    "followUpRequired": false,
+    "nextAction": "거래명세서 정리"
+  },
+  {
+    "taskId": "T007",
+    "partnerName": "다온기업",
+    "taskTitle": "미수금 관련 문의",
+    "dueDate": "2026-10-26",
+    "importance": "high",
+    "status": "pending",
+    "replyWaiting": true,
+    "followUpRequired": true,
+    "nextAction": "미수금 현황과 회신 여부 확인"
+  },
+  {
+    "taskId": "T008",
+    "partnerName": "새롬테크",
+    "taskTitle": "회의 결과 공유",
+    "dueDate": "2026-10-31",
+    "importance": "medium",
+    "status": "pending",
+    "replyWaiting": false,
+    "followUpRequired": true,
+    "nextAction": "회의 결과 정리 후 공유"
+  },
+  {
+    "taskId": "T009",
+    "partnerName": "푸른물산",
+    "taskTitle": "신규 거래 문의 검토",
+    "dueDate": null,
+    "importance": "medium",
+    "status": "pending",
+    "replyWaiting": false,
+    "followUpRequired": false,
+    "nextAction": "담당자와 일정 협의"
+  },
+  {
+    "taskId": "T010",
+    "partnerName": "푸른물산",
+    "taskTitle": "사업자 정보 확인",
+    "dueDate": "2026-11-02",
+    "importance": "low",
+    "status": "completed",
+    "replyWaiting": false,
+    "followUpRequired": false,
+    "nextAction": "완료 기록 확인"
+  }
+]
