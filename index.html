@@ -845,6 +845,112 @@ tasks = [
   }
 
   renderPersonalTasks();
+    // 개인 할 일 목록 표시
+  function renderPersonalTasks() {
+    const list = document.getElementById("personalTaskList");
+    const count = document.getElementById("personalTaskCount");
+
+    count.textContent = `${personalTasks.length}건`;
+
+    if (personalTasks.length === 0) {
+      list.innerHTML = '<div class="empty">등록한 할 일이 여기에 표시됩니다.</div>';
+      return;
+    }
+
+    list.innerHTML = personalTasks.map(task => `
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #eee">
+        <input
+          type="checkbox"
+          data-personal-complete="${task.id}"
+          ${task.completed ? "checked" : ""}
+        >
+        <div style="flex:1;min-width:0">
+          <div style="${task.completed ? "text-decoration:line-through;color:#999;" : ""}">
+            ${escapeHTML(task.title)}
+          </div>
+          <small style="color:#777">
+            ${task.dueDate || "마감일 없음"} · ${
+              task.importance === "high" ? "높음" :
+              task.importance === "low" ? "낮음" : "보통"
+            }
+          </small>
+        </div>
+        <button type="button" data-personal-delete="${task.id}">삭제</button>
+      </div>
+    `).join("");
+  }
+
+  // HTML에 표시할 텍스트 안전 처리
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  // 할 일 추가
+  document.getElementById("personalTaskForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const titleInput = document.getElementById("personalTaskTitle");
+    const dueInput = document.getElementById("personalTaskDue");
+    const importanceInput = document.getElementById("personalTaskImportance");
+    const title = titleInput.value.trim();
+
+    if (!title) {
+      alert("해야 할 일을 입력해 주세요.");
+      return;
+    }
+
+    personalTasks.unshift({
+      id: Date.now().toString(),
+      title,
+      dueDate: dueInput.value || null,
+      importance: importanceInput.value,
+      completed: false
+    });
+
+    localStorage.setItem(
+      "contacttalk_personal_tasks",
+      JSON.stringify(personalTasks)
+    );
+
+    event.target.reset();
+    importanceInput.value = "medium";
+    renderPersonalTasks();
+    showToast("할 일이 추가되었습니다.");
+  });
+
+  // 완료 처리 및 삭제
+  document.getElementById("personalTaskList").addEventListener("click", event => {
+    const completeId = event.target.dataset.personalComplete;
+    const deleteId = event.target.dataset.personalDelete;
+
+    if (completeId) {
+      personalTasks = personalTasks.map(task =>
+        task.id === completeId
+          ? { ...task, completed: event.target.checked }
+          : task
+      );
+    } else if (deleteId) {
+      personalTasks = personalTasks.filter(task => task.id !== deleteId);
+    } else {
+      return;
+    }
+
+    localStorage.setItem(
+      "contacttalk_personal_tasks",
+      JSON.stringify(personalTasks)
+    );
+
+    renderPersonalTasks();
+  });
+
+  // 처음 화면을 열 때 저장된 할 일 표시
+  renderPersonalTasks();
   loadTasks();
   connect();
 </script>
