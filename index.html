@@ -281,7 +281,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="https://cdn.botframework.com/botframework-webchat/4.18.0/webchat.js"></script>
 <script>
-  const DATA_URL = "https://contacttalk-api.duubuu106.workers.dev";
+  const API_URL = "https://contacttalk-api.duubuu106.workers.dev";
   let tasks = [];
   let dataLoaded = false;
   let activeFilter = "all";
@@ -487,7 +487,7 @@
     $("headlineText").innerHTML = '업무 데이터를 불러오고 있어요.<br><span class="highlight">잠시만 기다려 주세요.</span>';
 
     try {
-      const response = await fetch(DATA_URL, { cache: "no-store" });
+      const response = await fetch(API_URL, { cache: "no-store" });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const json = await response.json();
       if (!Array.isArray(json)) throw new Error("JSON 형식이 배열이 아닙니다.");
@@ -662,8 +662,4 @@
 </body>
 </html>
 
-<iframe
-  src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_bot_24VPPR/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
-  frameborder="0"
-  style="width:100%; height:600px; border:0;"
-></iframe>
+
