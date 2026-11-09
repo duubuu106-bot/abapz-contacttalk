@@ -259,17 +259,47 @@
       <section class="panel"><div id="completedPageList"></div></section>
     </section>
 
-    <section id="chatView" class="view">
-      <header class="topbar"><div><div class="eyebrow">AI WORK ASSISTANT</div><h1>AI 업무 도우미</h1><div class="subhead">업무 현황을 질문하고 다음 행동을 정리해 보세요.</div></div></header>
-      <section class="chat-panel">
-        <div class="chat-header"><div class="chat-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 12l5.2-1.8L12 3Z"/><path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16Z"/></svg></div><div><h2>연락톡 업무 브리핑 에이전트</h2><p>Copilot Studio · 업무 관련 질문</p></div></div>
-        <p id="status" role="status" aria-live="polite">채팅에 연결하는 중입니다...</p>
-        <div class="chat-intro">업무와 관련해 궁금한 내용을 자연어로 질문해 보세요. 예를 들어 오늘 먼저 처리할 업무나 답변 대기 중인 업무를 물어볼 수 있어요.</div>
-        <div class="chat-shortcuts"><button type="button" data-question="오늘 가장 먼저 처리해야 할 업무 알려줘.">오늘 먼저 할 일</button><button type="button" data-question="답변을 기다리고 있는 업무만 보여줘.">답변 대기 업무</button><button type="button" data-question="마감이 지난 업무가 있어?">기한 초과 업무</button></div>
-        <div id="webchat" aria-label="연락톡 AI 채팅"></div>
-      </section>
-    </section>
-  </main>
+   
+<section id="chatView" class="view">
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">AI WORK ASSISTANT</div>
+      <h1>AI 업무 도우미</h1>
+      <div class="subhead">업무 현황을 질문하고 다음 행동을 정리해 보세요.</div>
+    </div>
+  </header>
+
+  <section class="chat-panel">
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 12l5.2-1.8L12 3Z"/>
+          <path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16Z"/>
+        </svg>
+      </div>
+      <div>
+        <h2>연락톡 업무 브리핑 에이전트</h2>
+        <p>Copilot Studio · 업무 관련 질문</p>
+      </div>
+    </div>
+
+    <div class="chat-intro">
+      업무와 관련해 궁금한 내용을 자연어로 질문해 보세요.
+      예를 들어 오늘 먼저 처리할 업무나 답변 대기 중인 업무를 물어볼 수 있어요.
+    </div>
+
+    <div id="webchat" aria-label="연락톡 AI 채팅">
+      <iframe
+        src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_bot_24VPPR/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+        title="연락톡 AI 업무 도우미"
+        style="width:100%; height:600px; border:0;"
+        frameborder="0"
+        allow="microphone">
+      </iframe>
+    </div>
+  </section>
+</section>
+</main>
 </div>
 
 <nav class="mobile-nav" aria-label="모바일 메뉴">
@@ -588,23 +618,7 @@
   });
 
   // 기존 Copilot Studio / Direct Line 연결 설정 유지
-  const BROKER_URL = "https://contacttalk-broker.duubuu106.workers.dev";
-
-
-  const status = document.getElementById("status");
-
-  function showError(message) {
-    status.hidden = false;
-    status.textContent = message;
-  }
-
-  async function connect() {
-    if (!window.WebChat ||
-        typeof WebChat.createDirectLine !== "function" ||
-        typeof WebChat.renderWebChat !== "function") {
-      showError("채팅 구성 요소를 불러오지 못했습니다. 네트워크를 확인한 뒤 새로고침해 주세요.");
-      return;
-    }
+  
 
     let response;
     try {
@@ -657,7 +671,7 @@
   }
 
   loadTasks();
-  connect();
+  
 </script>
 </body>
 </html>
